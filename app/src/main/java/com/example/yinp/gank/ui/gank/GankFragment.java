@@ -22,11 +22,13 @@ public class GankFragment extends Fragment {
     private ArrayList<String> mTitleList = new ArrayList<>(4);
     private ArrayList<Fragment> mFragments = new ArrayList<>(4);
     private FragmentGankBinding bindingView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        bindingView = DataBindingUtil.inflate(getActivity().getLayoutInflater(), R.layout.fragment_gank, null, false);
-        return inflater.inflate(R.layout.fragment_gank, null);
+        View view = inflater.inflate(R.layout.fragment_gank,null);
+        bindingView = DataBindingUtil.bind(view);
+        return view;
     }
 
     @Override
@@ -42,7 +44,7 @@ public class GankFragment extends Fragment {
         bindingView.vpGank.setAdapter(myAdapter);
         // 左右预加载页面的个数
         bindingView.vpGank.setOffscreenPageLimit(3);
-//        myAdapter.notifyDataSetChanged();
+        myAdapter.notifyDataSetChanged();
         bindingView.tabGank.setTabMode(TabLayout.MODE_FIXED);
         bindingView.tabGank.setupWithViewPager(bindingView.vpGank);
     }

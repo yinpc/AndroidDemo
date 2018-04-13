@@ -7,16 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_gank"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#fff2f4f5">
-
-        </android.support.v4.view.ViewPager>
-
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_gank"
             android:layout_width="match_parent"
@@ -27,5 +17,14 @@
             app:tabTextColor="@color/colorTabTextNormal">
 
         </android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_gank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff2f4f5">
+
+        </android.support.v4.view.ViewPager>
+
     </LinearLayout>
 </layout>

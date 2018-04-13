@@ -59,11 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFragmentList.add(new BookFragment());
         MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(adapter);
-//        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.addOnPageChangeListener(this);
-//        ivTitleGank.setSelected(true);
-//        mViewPager.setCurrentItem(0);
-//        setSupportActionBar(toolbar);
         ivTitleGank.setSelected(true);
         mViewPager.setCurrentItem(1);
     }
