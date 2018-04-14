@@ -26,9 +26,9 @@ public class GankFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gank,null);
-        bindingView = DataBindingUtil.bind(view);
-        return view;
+//        View view = inflater.inflate(R.layout.fragment_gank,null);
+        bindingView = DataBindingUtil.inflate(inflater, R.layout.fragment_gank, null, false);
+        return bindingView.getRoot();
     }
 
     @Override
