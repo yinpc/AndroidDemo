@@ -40,18 +40,18 @@ public class WelfareRecyclerViewAdapter extends RecyclerView.Adapter<WelfareRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String url = mFeedImageInfos.get(position).getUrl();
-        RequestOptions options = new RequestOptions()
-                .placeholder(new ColorDrawable(Color.BLACK))
-                .override(holder.mImageView.getWidth(), BitmapImageViewTarget.SIZE_ORIGINAL)
-                .fitCenter();
+            String url = mFeedImageInfos.get(position).getUrl();
 
-        Glide.with(mContext)
-                .asBitmap()
-                .apply(options)
-                .load(url)
-                .into(new DriverViewTarget(holder.mImageView, mFeedImageInfos.get(position)));
+            RequestOptions options = new RequestOptions()
+                    .placeholder(new ColorDrawable(Color.BLACK))
+                    .override(holder.mImageView.getWidth(), BitmapImageViewTarget.SIZE_ORIGINAL)
+                    .fitCenter();
 
+            Glide.with(mContext)
+                    .asBitmap()
+                    .apply(options)
+                    .load(url)
+                    .into(new DriverViewTarget(holder.mImageView, mFeedImageInfos.get(position)));
     }
 
     public static int getScreenWidth(Context context) {

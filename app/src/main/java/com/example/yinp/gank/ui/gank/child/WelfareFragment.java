@@ -71,7 +71,7 @@ public class WelfareFragment extends Fragment {
                     public void run() {
                         loadData(true);
                     }
-                }, 1000);
+                }, 100);
             }
         });
     }
@@ -95,6 +95,7 @@ public class WelfareFragment extends Fragment {
                 if (isRefresh){
                     feedImageInfos.clear();
                 }
+                adapter.notifyDataSetChanged();
 
                 for(GankIoDataBean.ResultBean s : response.body().getResults()){
 //                    mUrls.add(s.getUrl());
