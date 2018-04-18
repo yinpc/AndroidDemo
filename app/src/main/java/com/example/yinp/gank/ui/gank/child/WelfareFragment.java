@@ -18,6 +18,7 @@ import com.example.yinp.gank.R;
 import com.example.yinp.gank.bean.FeedImageInfo;
 import com.example.yinp.gank.bean.GankIoDataBean;
 import com.example.yinp.gank.databinding.FragmentWelfareBinding;
+import com.example.yinp.gank.databinding.WelfareHeaderBinding;
 import com.example.yinp.gank.http.HttpClient;
 import com.example.yinp.gank.adapter.WelfareRecyclerViewAdapter;
 import com.example.yinp.gank.view.recyclerview.XRecyclerView;
@@ -36,6 +37,7 @@ public class WelfareFragment extends Fragment {
     private WelfareRecyclerViewAdapter adapter;
     private ArrayList<FeedImageInfo> feedImageInfos;
     private int page;
+    private WelfareHeaderBinding headerBinding;
 
     @Nullable
     @Override
@@ -60,6 +62,8 @@ public class WelfareFragment extends Fragment {
         feedImageInfos = new ArrayList<>();
         adapter = new WelfareRecyclerViewAdapter(getContext(), feedImageInfos);
         bindingView.recyclerView.setAdapter(adapter);
+        headerBinding = DataBindingUtil.inflate(getLayoutInflater(), R.layout.welfare_header, null,false);
+        bindingView.recyclerView.addHeaderView(headerBinding.getRoot());
         bindingView.recyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onLoadMore() {

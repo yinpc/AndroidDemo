@@ -11,6 +11,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.util.SparseArray;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 /**
@@ -122,6 +123,20 @@ public class XRecyclerView extends RecyclerView {
                 }
             }
         }
+    }
+
+    public void clearHeader() {
+        mHeaderViews.clear();
+        final float scale = getContext().getResources().getDisplayMetrics().density;
+        int height = (int) (1.0f * scale + 0.5f);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        View view = new View(getContext());
+        view.setLayoutParams(params);
+        mHeaderViews.put(0, view);
+    }
+
+    public void addHeaderView(View view) {
+        mHeaderViews.put(mHeaderViews.size(), view);
     }
 
     public void loadMoreComplete() {
