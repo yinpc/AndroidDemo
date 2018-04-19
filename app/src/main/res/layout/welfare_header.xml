@@ -3,12 +3,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#564678">
-        
-        <LinearLayout
+        android:layout_height="wrap_content">
+
+        <com.youth.banner.Banner xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="#564678"></LinearLayout>
+            android:layout_height="180dp"
+            android:background="@mipmap/img_two_bi_one"
+            app:image_scale_type="center_crop"
+            app:indicator_drawable_selected="@mipmap/banner_red"
+            app:indicator_drawable_unselected="@mipmap/banner_grey"
+            app:indicator_height="9dp"
+            app:indicator_margin="3dp"
+            app:indicator_width="9dp"
+            app:delay_time="5000"
+            app:is_auto_play="true" />
     </LinearLayout>
 </layout>

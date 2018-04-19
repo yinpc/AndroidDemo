@@ -22,7 +22,7 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private SparseArray<View> mHeaderViews;
     private SparseArray<View> mFootViews;
 
-//    private int headerPosition = 1;
+    private int headerPosition = 0;
 
     public WrapAdapter(SparseArray<View> mHeaderViews,
                        SparseArray<View> mFootViews,
@@ -78,7 +78,7 @@ public class WrapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            return new SimpleViewHolder(mHeaderViews.get(0));
+            return new SimpleViewHolder(mHeaderViews.get(headerPosition++));
         } else if (viewType == TYPE_FOOTER) {
             return new SimpleViewHolder(mFootViews.get(0));
         }
