@@ -12,7 +12,6 @@ import com.example.yinp.gank.R;
 /**
  * @author yinp
  * https://github.com/XRecyclerView/XRecyclerView/blob/master/xrecyclerview/src/main/java/com/jcodecraeer/xrecyclerview/LoadingMoreFooter.java
- * todo: 对照优化下
  */
 public class LoadingMoreFooter extends LinearLayout {
     public final static int STATE_LOADING = 0;
@@ -48,9 +47,5 @@ public class LoadingMoreFooter extends LinearLayout {
                 this.setVisibility(View.VISIBLE);
                 break;
         }
-    }
-
-    public void reset() {
-        this.setVisibility(GONE);
     }
 }
