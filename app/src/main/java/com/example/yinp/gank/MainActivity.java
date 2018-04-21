@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,7 +17,7 @@ import com.example.yinp.gank.databinding.NavHeaderMainBinding;
 import com.example.yinp.gank.ui.book.BookFragment;
 import com.example.yinp.gank.ui.gank.GankFragment;
 import com.example.yinp.gank.ui.one.OneFragment;
-import com.example.yinp.gank.view.statusbar.MyFragmentPagerAdapter;
+import com.example.yinp.gank.adapter.MyFragmentPagerAdapter;
 import com.example.yinp.gank.view.statusbar.StatusBarUtil;
 
 import java.util.ArrayList;
@@ -29,12 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawerLayout;
     private FrameLayout llTitleMenu;
     private NavigationView navView;
-    private NavHeaderMainBinding navHeaderBind;
     private ViewPager mViewPager;
     private ImageView ivTitleOne;
     private ImageView ivTitleGank;
     private ImageView ivTitleDou;
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +70,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivTitleOne = mBinding.include.ivTitleOne;
         ivTitleGank = mBinding.include.ivTitleGank;
         ivTitleDou = mBinding.include.ivTitleDou;
-        toolbar = mBinding.include.toolbar;
     }
 
     private void initDrawerLayout() {
         View headerView = navView.getHeaderView(0);
-        navHeaderBind = DataBindingUtil.bind(headerView);
-        navHeaderBind.llNavExit.setOnClickListener(this);
+        NavHeaderMainBinding navHeaderBind = DataBindingUtil.bind(headerView);
+        if (navHeaderBind != null) {
+            navHeaderBind.llNavExit.setOnClickListener(this);
+        }
     }
 
     private void initListener() {
@@ -162,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
