@@ -17,7 +17,7 @@ import com.example.yinp.gank.databinding.NavHeaderMainBinding;
 import com.example.yinp.gank.ui.book.BookFragment;
 import com.example.yinp.gank.ui.gank.GankFragment;
 import com.example.yinp.gank.ui.one.OneFragment;
-import com.example.yinp.gank.view.statusbar.MyFragmentPagerAdapter;
+import com.example.yinp.gank.adapter.MyFragmentPagerAdapter;
 import com.example.yinp.gank.view.statusbar.StatusBarUtil;
 
 import java.util.ArrayList;

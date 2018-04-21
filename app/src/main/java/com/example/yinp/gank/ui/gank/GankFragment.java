@@ -14,7 +14,7 @@ import com.example.yinp.gank.R;
 import com.example.yinp.gank.databinding.FragmentGankBinding;
 import com.example.yinp.gank.ui.gank.child.EverydayFragment;
 import com.example.yinp.gank.ui.gank.child.WelfareFragment;
-import com.example.yinp.gank.view.statusbar.MyFragmentPagerAdapter;
+import com.example.yinp.gank.adapter.MyFragmentPagerAdapter;
 
 import java.util.ArrayList;
 
