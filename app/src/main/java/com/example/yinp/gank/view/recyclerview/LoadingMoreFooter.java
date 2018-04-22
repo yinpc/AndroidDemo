@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.yinp.gank.R;
 
 /**
@@ -19,6 +20,7 @@ public class LoadingMoreFooter extends LinearLayout {
     public final static int STATE_NOMORE = 2;
 
     private TextView mTextView;
+    private LottieAnimationView mLottieAnimationView;
 
     public LoadingMoreFooter(Context context) {
         super(context);
@@ -28,6 +30,7 @@ public class LoadingMoreFooter extends LinearLayout {
     private void initView(Context context) {
         LayoutInflater.from(context).inflate(R.layout.xrecyclerview_footer, this);
         mTextView = findViewById(R.id.xrecyclerview_msg);
+        mLottieAnimationView = findViewById(R.id.animation_view);
         setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
     }
@@ -35,16 +38,24 @@ public class LoadingMoreFooter extends LinearLayout {
     public void setState(int state) {
         switch (state) {
             case STATE_LOADING:
-                mTextView.setText(getContext().getText(R.string.xrecyclerview_loading_more));
-                this.setVisibility(View.VISIBLE);
+//                mTextView.setText(getContext().getText(R.string.xrecyclerview_loading_more));
+                mTextView.setVisibility(GONE);
+                mLottieAnimationView.setVisibility(VISIBLE);
+                mLottieAnimationView.playAnimation();
+                this.setVisibility(VISIBLE);
                 break;
             case STATE_COMPLETE:
-                mTextView.setText(getContext().getText(R.string.xrecyclerview_loading_more));
-                this.setVisibility(View.GONE);
+//                mTextView.setText(getContext().getText(R.string.xrecyclerview_loading_more));
+                mTextView.setVisibility(GONE);
+                mLottieAnimationView.cancelAnimation();
+                mLottieAnimationView.setVisibility(GONE);
+                this.setVisibility(GONE);
                 break;
             case STATE_NOMORE:
                 mTextView.setText(getContext().getText(R.string.xrecyclerview_nomore_loading));
-                this.setVisibility(View.VISIBLE);
+                mLottieAnimationView.cancelAnimation();
+                mLottieAnimationView.setVisibility(GONE);
+                this.setVisibility(VISIBLE);
                 break;
         }
     }
