@@ -1,5 +1,7 @@
 package com.example.yinp.gank.ui.gank.child;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -21,15 +23,16 @@ import com.example.yinp.gank.bean.FeedImageInfo;
 import com.example.yinp.gank.bean.GankIoDataBean;
 import com.example.yinp.gank.databinding.FragmentWelfareBinding;
 import com.example.yinp.gank.databinding.WelfareHeaderBinding;
-import com.example.yinp.gank.http.HttpClient;
 import com.example.yinp.gank.adapter.WelfareRecyclerViewAdapter;
 import com.example.yinp.gank.view.recyclerview.XRecyclerView;
+import com.example.yinp.gank.viewmodel.gank.WelfareViewModel;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Observable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +49,7 @@ public class WelfareFragment extends Fragment {
     private WelfareHeaderBinding headerBinding;
     private List<String> mBannerTitle;
     private List<String> mBannerImages;
+    private WelfareViewModel welfareViewModel;
 
     @Nullable
     @Override
@@ -66,6 +70,7 @@ public class WelfareFragment extends Fragment {
                 "https://ws1.sinaimg.cn/large/610dc034ly1fhhz28n9vyj20u00u00w9.jpg");
         initView();
         page = 1;
+        welfareViewModel = ViewModelProviders.of(this).get(WelfareViewModel.class);
         loadData(true, page);
     }
 
@@ -121,20 +126,41 @@ public class WelfareFragment extends Fragment {
     }
 
     private void loadData(final boolean isRefresh, int page) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://gank.io/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        HttpClient client = retrofit.create(HttpClient.class);
-        Call<GankIoDataBean> call = client.getGankIoData("福利", page, 20);
-        call.enqueue(new Callback<GankIoDataBean>() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("https://gank.io/api/")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        HttpClient client = retrofit.create(HttpClient.class);
+//        Call<GankIoDataBean> call = client.getGankIoData("福利", page, 20);
+//        call.enqueue(new Callback<GankIoDataBean>() {
+//            @Override
+//            public void onResponse(Call<GankIoDataBean> call, Response<GankIoDataBean> response) {
+//                if (isRefresh) {
+//                    feedImageInfos.clear();
+//                }
+//
+//                for (GankIoDataBean.ResultBean s : response.body().getResults()) {
+//                    feedImageInfos.add(new FeedImageInfo(s.getUrl()));
+//                }
+//
+//                bindingView.recyclerView.loadMoreComplete();
+//                adapter.notifyDataSetChanged();
+//                bindingView.srlWelfare.setRefreshing(false);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<GankIoDataBean> call, Throwable t) {
+//                t.printStackTrace();
+//            }
+//        });
+        welfareViewModel.getWelfareData("福利", page,20).observe(this, new Observer<GankIoDataBean>() {
             @Override
-            public void onResponse(Call<GankIoDataBean> call, Response<GankIoDataBean> response) {
+            public void onChanged(@Nullable GankIoDataBean gankIoDataBean) {
                 if (isRefresh) {
                     feedImageInfos.clear();
                 }
 
-                for (GankIoDataBean.ResultBean s : response.body().getResults()) {
+                for (GankIoDataBean.ResultBean s : gankIoDataBean.getResults()) {
                     feedImageInfos.add(new FeedImageInfo(s.getUrl()));
                 }
 
@@ -142,11 +168,7 @@ public class WelfareFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 bindingView.srlWelfare.setRefreshing(false);
             }
-
-            @Override
-            public void onFailure(Call<GankIoDataBean> call, Throwable t) {
-                t.printStackTrace();
-            }
         });
+
     }
 }
